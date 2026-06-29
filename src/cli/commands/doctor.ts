@@ -93,10 +93,8 @@ export async function runDoctor(): Promise<void> {
   console.log(`${BOLD}Project${RESET}`);
 
   const pkgPath = path.join(cwd, 'package.json');
-  let hasPkg = false;
   try {
     const raw = await fs.readFile(pkgPath, 'utf-8');
-    hasPkg = true;
     const pkg = JSON.parse(raw) as Record<string, unknown>;
     check('package.json found', true, String(pkg.name ?? '(no name)'));
 
