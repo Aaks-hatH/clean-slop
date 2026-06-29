@@ -10,11 +10,6 @@ import type { ASTNode } from '../../utils/ast.js';
  *   function isValid(data) { return true; }
  */
 
-const TRIVIAL_TRUE_PATTERNS = [
-  /return\s+true\s*;/,
-  /return\s+1\s*;/,
-];
-
 const VALIDATION_NAME_PATTERN =
   /^(validate|isValid|check|verify|sanitize|assert)/i;
 
