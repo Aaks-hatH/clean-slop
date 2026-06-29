@@ -4,7 +4,7 @@ import process from 'process';
 import { loadConfig } from '../../config/loader.js';
 import { scan } from '../../scanners/scanner.js';
 import { generateTextReport } from '../../reporters/text-reporter.js';
-import { BOLD, CYAN, DIM, GREEN, RED, RESET, YELLOW } from '../../utils/constants.js';
+import { BOLD, CYAN, DIM, GREEN, RED, RESET } from '../../utils/constants.js';
 
 export interface WatchCommandOptions {
   config?: string;
