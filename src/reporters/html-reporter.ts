@@ -53,7 +53,7 @@ function renderIssueCard(issue: Issue, root: string): string {
 }
 
 export function generateHtmlReport(result: ScanResult): string {
-  const { score, issues, files, durationMs, config, root, version, timestamp } = result;
+  const { score, issues, files, durationMs, root, version, timestamp } = result;
 
   const criticalCount = issues.filter((i) => i.severity === 'critical').length;
   const highCount = issues.filter((i) => i.severity === 'high').length;
