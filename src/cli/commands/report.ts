@@ -4,7 +4,7 @@ import { loadConfig } from '../../config/loader.js';
 import { scan } from '../../scanners/scanner.js';
 import { generate, writeReport } from '../../reporters/index.js';
 import type { ReporterName } from '../../reporters/index.js';
-import { GREEN, RED, RESET } from '../../utils/constants.js';
+import { GREEN, RESET } from '../../utils/constants.js';
 
 export interface ReportCommandOptions {
   config?: string;
