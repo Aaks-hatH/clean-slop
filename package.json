@@ -14,26 +14,26 @@
     "cli",
     "devtools"
   ],
-  "homepage": "https://github.com/clean-slop/clean-slop#readme",
+  "homepage": "https://github.com/aaks-hath/clean-slop#readme",
   "bugs": {
-    "url": "https://github.com/clean-slop/clean-slop/issues"
+    "url": "https://github.com/aaks-hath/clean-slop/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/clean-slop/clean-slop.git"
+    "url": "git+https://github.com/aaks-hath/clean-slop.git"
   },
   "license": "MIT",
   "author": "clean-slop contributors",
   "type": "module",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     },
     "./cli": {
-      "import": "./dist/cli/index.js",
-      "types": "./dist/cli/index.d.ts"
+      "types": "./dist/cli/index.d.ts",
+      "import": "./dist/cli/index.js"
     }
   },
   "main": "./dist/index.cjs",
