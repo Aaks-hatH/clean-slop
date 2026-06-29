@@ -66,7 +66,7 @@ export async function discoverFiles(config: ResolvedConfig): Promise<string[]> {
   });
 }
 
-function buildEngine(config: ResolvedConfig): RuleEngine {
+function buildEngine(_config: ResolvedConfig): RuleEngine {
   const engine = new RuleEngine();
   engine.registerAll(BUILT_IN_RULES);
   return engine;
