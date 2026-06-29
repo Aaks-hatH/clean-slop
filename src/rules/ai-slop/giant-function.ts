@@ -3,7 +3,6 @@ import { traverse, getLocation, countFunctionLines, isFunctionNode } from '../..
 import type { ASTNode } from '../../utils/ast.js';
 
 const MAX_LINES = 80;
-const EXTREME_LINES = 200;
 
 const rule: Rule = {
   meta: {
@@ -33,9 +32,6 @@ const rule: Rule = {
       const lines = countFunctionLines(node);
       if (lines <= MAX_LINES) return;
 
-      const isExtreme = lines > EXTREME_LINES;
-      const severity = isExtreme ? 'high' : 'medium';
-
       const idNode = node.id as ASTNode | undefined;
       const name = idNode ? String(idNode.name) : '<anonymous>';
 
@@ -55,7 +51,6 @@ const rule: Rule = {
         },
         metadata: {
           lines,
-          severity,
         },
       });
     }
