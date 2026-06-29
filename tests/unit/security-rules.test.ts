@@ -6,7 +6,6 @@ import unsafeEval from '../../src/rules/security/unsafe-eval.js';
 import hardcodedSecrets from '../../src/rules/security/hardcoded-secrets.js';
 import sqlInjection from '../../src/rules/security/sql-injection.js';
 import commandInjection from '../../src/rules/security/command-injection.js';
-import pathTraversal from '../../src/rules/security/path-traversal.js';
 import weakCrypto from '../../src/rules/security/weak-crypto.js';
 import dangerousCors from '../../src/rules/security/dangerous-cors.js';
 
