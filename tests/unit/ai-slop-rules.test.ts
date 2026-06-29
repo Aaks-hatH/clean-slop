@@ -4,7 +4,6 @@ import { RuleEngine } from '../../src/rules/engine.js';
 import { resolveConfig } from '../../src/config/loader.js';
 import emptyCatch from '../../src/rules/ai-slop/empty-catch.js';
 import todoImplementation from '../../src/rules/ai-slop/todo-implementation.js';
-import giantFunction from '../../src/rules/ai-slop/giant-function.js';
 import fakeValidation from '../../src/rules/ai-slop/fake-validation.js';
 import deadCode from '../../src/rules/ai-slop/dead-code.js';
 import highComplexity from '../../src/rules/ai-slop/high-complexity.js';
