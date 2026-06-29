@@ -811,8 +811,8 @@
       <li><a href="#why">Why</a></li>
       <li><a href="#rules">Rules</a></li>
       <li><a href="#output">Output</a></li>
-      <li><a href="DOCS.md">Docs</a></li>
-      <li><a href="https://github.com/clean-slop/clean-slop" class="nav-cta">GitHub</a></li>
+      <li><a href="https://github.com/Aaks-hatH/clean-slop/blob/main/DOCS.md">Docs</a></li>
+      <li><a href="https://github.com/aaks-hath/clean-slop" class="nav-cta">GitHub</a></li>
     </ul>
   </nav>
 
@@ -837,7 +837,7 @@
         <i data-lucide="book-open" style="width:14px;height:14px"></i>
         Documentation
       </a>
-      <a href="https://github.com/clean-slop/clean-slop" class="btn-ghost">
+      <a href="https://github.com/aaks-hath/clean-slop" class="btn-ghost">
         <i data-lucide="github" style="width:14px;height:14px"></i>
         GitHub
       </a>
@@ -1007,6 +1007,9 @@
 
     <div class="rules-layout">
       <nav class="rules-nav" id="rules-nav">
+        <div class="rules-nav-item" data-cat="all">
+          <div class="dot"></div>All Rules
+        </div>
         <div class="rules-nav-item active" data-cat="ai-slop">
           <div class="dot"></div>AI Slop
         </div>
@@ -1314,11 +1317,11 @@
     <br />
 
     <div class="install-links">
-      <a href="DOCS.md" class="install-link">
+      <a href="https://github.com/aaks-hath/clean-slop/blob/main/DOCS.md" class="install-link">
         <i data-lucide="book-open" style="width:13px;height:13px"></i>
         Full Documentation
       </a>
-      <a href="https://github.com/clean-slop/clean-slop" class="install-link">
+      <a href="https://github.com/aaks-hath/clean-slop" class="install-link">
         <i data-lucide="github" style="width:13px;height:13px"></i>
         View on GitHub
       </a>
@@ -1334,8 +1337,8 @@
     <div class="footer-logo"><span>clean</span>-slop v1.0.0</div>
     <ul class="footer-links">
       <li><a href="DOCS.md">Documentation</a></li>
-      <li><a href="CHANGELOG.md">Changelog</a></li>
-      <li><a href="https://github.com/clean-slop/clean-slop">GitHub</a></li>
+      <li><a href="https://github.com/Aaks-hatH">Aakshat Hariharan</a></li>
+      <li><a href="https://github.com/aaks-hath/clean-slop">GitHub</a></li>
       <li><a href="https://www.npmjs.com/package/clean-slop">npm</a></li>
     </ul>
     <span class="footer-copy">MIT License</span>
@@ -1349,22 +1352,22 @@
       if (window.lucide) lucide.createIcons();
 
       // ── GSAP animations
-      if (!window.gsap) return;
+      if (!window.gsap) {
+        // CDN failed: make all animated elements visible immediately
+        var animated = document.querySelectorAll('.hero-eyebrow, .hero-headline, .hero-sub, .hero-actions, .hero-terminal, .why-item, .cat-card, .rule-item, .format-card, .score-card-demo');
+        animated.forEach(function(el) { el.style.opacity = '1'; el.style.transform = 'none'; });
+        return;
+      }
       gsap.registerPlugin(ScrollTrigger);
 
       // Hero entrance
       const heroTl = gsap.timeline({ delay: 0.1 });
       heroTl
-        .to('#eyebrow',      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0)
-        .from('#eyebrow',    { y: 12 }, 0)
-        .to('#headline',     { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 0.15)
-        .from('#headline',   { y: 20 }, 0.15)
-        .to('#herosub',      { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 0.3)
-        .from('#herosub',    { y: 16 }, 0.3)
-        .to('#heroactions',  { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.45)
-        .from('#heroactions',{ y: 12 }, 0.45)
-        .to('#heroterminal', { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 0.6)
-        .from('#heroterminal',{ y: 24 }, 0.6);
+        .fromTo('#eyebrow',      { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0)
+        .fromTo('#headline',     { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 0.15)
+        .fromTo('#herosub',      { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 0.3)
+        .fromTo('#heroactions',  { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.45)
+        .fromTo('#heroterminal', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 0.6);
 
       // Why section items
       gsap.utils.toArray('.why-item').forEach(function(el, i) {
@@ -1430,10 +1433,12 @@
             ease: 'power2.out',
             delay: 0.3,
             onUpdate: function() {
-              document.getElementById('score-display').textContent = Math.round(obj.val);
+              const el = document.getElementById('score-display');
+              if (el) el.textContent = String(Math.round(obj.val));
             },
             onComplete: function() {
-              document.getElementById('grade-display').textContent = '/100  Grade: D';
+              const el = document.getElementById('grade-display');
+              if (el) el.textContent = '/100  Grade: D';
             }
           });
 
@@ -1466,19 +1471,25 @@
       var navItems = document.querySelectorAll('.rules-nav-item');
       var ruleItems = document.querySelectorAll('.rule-item');
 
+      function applyFilter(cat) {
+        ruleItems.forEach(function(rule) {
+          if (cat === 'all' || rule.getAttribute('data-cat') === cat) {
+            rule.style.display = '';
+          } else {
+            rule.style.display = 'none';
+          }
+        });
+      }
+
+      // Apply initial filter matching the active nav item
+      var activeItem = document.querySelector('.rules-nav-item.active');
+      if (activeItem) applyFilter(activeItem.getAttribute('data-cat') || 'all');
+
       navItems.forEach(function(item) {
         item.addEventListener('click', function() {
           navItems.forEach(function(n) { n.classList.remove('active'); });
           item.classList.add('active');
-          var cat = item.getAttribute('data-cat');
-
-          ruleItems.forEach(function(rule) {
-            if (cat === 'all' || rule.getAttribute('data-cat') === cat) {
-              rule.style.display = '';
-            } else {
-              rule.style.display = 'none';
-            }
-          });
+          applyFilter(item.getAttribute('data-cat') || 'all');
         });
       });
 
