@@ -2,6 +2,7 @@
  * Test fixture: deliberately contains violations for integration testing.
  * This file is not production code.
  */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 // FIXME: this whole module needs a rewrite
 // TODO: add proper error handling
@@ -20,7 +21,7 @@ const debug = true;
 const BASE_URL = 'http://localhost:3000/api';
 
 // Fake validation
-function validateUser(user: unknown): boolean {
+function validateUser(_user: unknown): boolean {
   return true;
 }
 
@@ -63,8 +64,8 @@ function calculateTotal(items: number[]) {
 
 // Giant function (fake - just to demonstrate the concept)
 function monolithicHandler(
-  req: Record<string, unknown>,
-  res: Record<string, unknown>,
+  _req: Record<string, unknown>,
+  _res: Record<string, unknown>,
 ) {
   // Placeholder
   throw new Error('Not implemented');
