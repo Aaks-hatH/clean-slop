@@ -1,5 +1,5 @@
 import type { Rule } from '../../types.js';
-import { traverse, getLocation, getCalleeName } from '../../utils/ast.js';
+import { traverse, getLocation } from '../../utils/ast.js';
 import type { ASTNode } from '../../utils/ast.js';
 
 const FS_WRITE_METHODS = new Set([
@@ -8,22 +8,6 @@ const FS_WRITE_METHODS = new Set([
   'unlink', 'unlinkSync', 'stat', 'statSync', 'access', 'accessSync',
   'open', 'openSync',
 ]);
-
-const PATH_JOIN_CALLS = new Set(['join', 'resolve', 'normalize']);
-
-function isPathJoinWithVariable(node: ASTNode): boolean {
-  const callee = node.callee as ASTNode | undefined;
-  if (!callee || callee.type !== 'MemberExpression') return false;
-
-  const obj = callee.object as ASTNode | undefined;
-  const prop = callee.property as ASTNode | undefined;
-
-  if (obj?.type !== 'Identifier' || String(obj.name) !== 'path') return false;
-  if (prop?.type !== 'Identifier' || !PATH_JOIN_CALLS.has(String(prop.name))) return false;
-
-  const args = (node.arguments as ASTNode[] | undefined) ?? [];
-  return args.some((arg) => arg.type !== 'Literal');
-}
 
 function isFsCallWithDynamicPath(node: ASTNode): boolean {
   const callee = node.callee as ASTNode | undefined;
