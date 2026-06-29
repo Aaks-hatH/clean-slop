@@ -1,5 +1,4 @@
 import type { Rule } from '../../types.js';
-import { traverse, getLocation } from '../../utils/ast.js';
 import type { ASTNode } from '../../utils/ast.js';
 
 const LOCALHOST_PATTERN = /https?:\/\/(?:localhost|127\.0\.0\.1|0\.0\.0\.0)(?::\d+)?/i;
