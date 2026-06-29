@@ -1,5 +1,4 @@
 import type { Rule } from '../../types.js';
-import { traverse, getLocation } from '../../utils/ast.js';
 import type { ASTNode } from '../../utils/ast.js';
 
 interface SecretPattern {
@@ -11,7 +10,7 @@ interface SecretPattern {
 const SECRET_PATTERNS: SecretPattern[] = [
   {
     name: 'API Key',
-    pattern: /(?:api[_-]?key|apikey)\s*[:=]\s*['"][a-zA-Z0-9_\-]{20,}['"]/i,
+    pattern: /(?:api[_-]?key|apikey)\s*[:=]\s*['"][a-zA-Z0-9_-]{20,}['"]/i,
     description: 'hardcoded API key',
   },
   {
@@ -46,7 +45,7 @@ const SECRET_PATTERNS: SecretPattern[] = [
   },
   {
     name: 'Generic Secret',
-    pattern: /(?:secret|token)\s*[:=]\s*['"][a-zA-Z0-9+/=_\-]{20,}['"]/i,
+    pattern: /(?:secret|token)\s*[:=]\s*['"][a-zA-Z0-9+/=_-]{20,}['"]/i,
     description: 'hardcoded secret or token',
   },
   {
