@@ -3,7 +3,6 @@ import { parseSource } from '../../src/parsers/source-parser.js';
 import { RuleEngine } from '../../src/rules/engine.js';
 import { resolveConfig } from '../../src/config/loader.js';
 import unhandledPromise from '../../src/rules/reliability/unhandled-promise.js';
-import missingAwait from '../../src/rules/reliability/missing-await.js';
 import infiniteLoop from '../../src/rules/reliability/infinite-loop.js';
 import noConsoleLog from '../../src/rules/production-readiness/no-console-log.js';
 import noLocalhostUrls from '../../src/rules/production-readiness/no-localhost-urls.js';
