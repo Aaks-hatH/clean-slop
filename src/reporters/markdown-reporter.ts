@@ -9,14 +9,6 @@ const SEVERITY_EMOJI: Record<Severity, string> = {
   info: 'INFO',
 };
 
-const SEVERITY_BADGE: Record<Severity, string> = {
-  critical: '![critical](https://img.shields.io/badge/severity-critical-red)',
-  high: '![high](https://img.shields.io/badge/severity-high-orange)',
-  medium: '![medium](https://img.shields.io/badge/severity-medium-yellow)',
-  low: '![low](https://img.shields.io/badge/severity-low-blue)',
-  info: '![info](https://img.shields.io/badge/severity-info-lightgrey)',
-};
-
 function scoreBadge(score: number): string {
   const color = score >= 90 ? 'brightgreen' : score >= 70 ? 'yellow' : 'red';
   return `![score](https://img.shields.io/badge/score-${score}%2F100-${color})`;
