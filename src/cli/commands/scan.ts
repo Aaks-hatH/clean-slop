@@ -2,18 +2,16 @@ import path from 'path';
 import process from 'process';
 import { loadConfig } from '../../config/loader.js';
 import { scan } from '../../scanners/scanner.js';
+import type { ScanOptions } from '../../scanners/scanner.js';
 import { generate, writeReport } from '../../reporters/index.js';
 import type { ReporterName } from '../../reporters/index.js';
 import type { ResolvedConfig, Severity } from '../../types.js';
 import {
   BOLD,
-  CYAN,
   DIM,
   GREEN,
   RED,
   RESET,
-  SEVERITY_COLORS,
-  YELLOW,
 } from '../../utils/constants.js';
 
 export interface ScanCommandOptions {
@@ -86,7 +84,7 @@ export async function runScan(
     console.log(`${DIM}Scanning ${cwd}${RESET}\n`);
   }
 
-  const scanOptions: import('../../scanners/scanner.js').ScanOptions = { config };
+  const scanOptions: ScanOptions = { config };
   if (!options.quiet && !ci) scanOptions.onFile = printProgress;
 
   const result = await scan(scanOptions);
