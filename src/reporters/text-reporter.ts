@@ -16,11 +16,6 @@ function pad(str: string, width: number): string {
   return str.padEnd(width);
 }
 
-function truncate(str: string, maxLength: number): string {
-  if (str.length <= maxLength) return str;
-  return str.slice(0, maxLength - 3) + '...';
-}
-
 function formatSeverity(severity: Severity): string {
   const color = SEVERITY_COLORS[severity] ?? '';
   const label = severity.toUpperCase().padEnd(8);
