@@ -15,6 +15,10 @@
  * ```
  */
 
+import type { UserConfig, ScanResult } from './types.js';
+import { loadConfig, resolveConfig } from './config/loader.js';
+import { scan } from './scanners/scanner.js';
+
 export type {
   Issue,
   IssueFix,
@@ -49,12 +53,8 @@ export { PACKAGE_VERSION as version } from './version.js';
  */
 export async function scanDirectory(
   directory: string,
-  userConfig?: import('./types.js').UserConfig,
-): Promise<import('./types.js').ScanResult> {
-  const { loadConfig } = await import('./config/loader.js');
-  const { resolveConfig } = await import('./config/loader.js');
-  const { scan } = await import('./scanners/scanner.js');
-
+  userConfig?: UserConfig,
+): Promise<ScanResult> {
   const config = userConfig
     ? resolveConfig(userConfig, directory)
     : await loadConfig(directory);
