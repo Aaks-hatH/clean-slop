@@ -14,7 +14,7 @@
     "cli",
     "devtools"
   ],
-  "homepage": "https://github.com/aaks-hath/clean-slop#readme",
+  "homepage": "https://clean-slop.vercel.app",
   "bugs": {
     "url": "https://github.com/aaks-hath/clean-slop/issues"
   },
