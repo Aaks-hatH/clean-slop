@@ -30,11 +30,16 @@ function severityToSarifLevel(severity: Severity): SarifLevel {
 
 function toSarifSecuritySeverity(severity: Severity): string {
   switch (severity) {
-    case 'critical': return '9.5';
-    case 'high': return '7.5';
-    case 'medium': return '5.0';
-    case 'low': return '2.5';
-    case 'info': return '0.0';
+    case 'critical':
+      return '9.5';
+    case 'high':
+      return '7.5';
+    case 'medium':
+      return '5.0';
+    case 'low':
+      return '2.5';
+    case 'info':
+      return '0.0';
   }
 }
 
@@ -68,7 +73,7 @@ export function generateSarifReport(result: ScanResult): string {
       text: issue.fix?.description ?? 'See documentation for details.',
       markdown: issue.fix?.code
         ? `${issue.fix.description}\n\n\`\`\`javascript\n${issue.fix.code}\n\`\`\``
-        : issue.fix?.description ?? 'See documentation for details.',
+        : (issue.fix?.description ?? 'See documentation for details.'),
     },
     helpUri: issue.docsUrl ?? `https://clean-slop.dev/docs/rules/${issue.ruleId}`,
     properties: {
@@ -113,7 +118,8 @@ export function generateSarifReport(result: ScanResult): string {
   }));
 
   const sarif = {
-    $schema: 'https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json',
+    $schema:
+      'https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json',
     version: '2.1.0',
     runs: [
       {

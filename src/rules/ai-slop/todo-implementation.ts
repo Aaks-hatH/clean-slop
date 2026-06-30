@@ -2,7 +2,8 @@ import type { Rule } from '../../types.js';
 import { traverse, getLocation } from '../../utils/ast.js';
 import type { ASTNode } from '../../utils/ast.js';
 
-const TODO_PATTERN = /\b(TODO|FIXME|HACK|XXX|TEMP|TEMPORARY|PLACEHOLDER|NOT IMPLEMENTED|NOT_IMPLEMENTED)\b/i;
+const TODO_PATTERN =
+  /\b(TODO|FIXME|HACK|XXX|TEMP|TEMPORARY|PLACEHOLDER|NOT IMPLEMENTED|NOT_IMPLEMENTED)\b/i;
 const THROW_NOT_IMPLEMENTED = /not.?implemented|to.?do|todo/i;
 
 const rule: Rule = {
@@ -38,7 +39,8 @@ const rule: Rule = {
             'when the unfinished code path is reached.',
           location: getLocation(comment, context.filePath),
           fix: {
-            description: 'Implement the described functionality or create a tracked issue and remove the inline marker.',
+            description:
+              'Implement the described functionality or create a tracked issue and remove the inline marker.',
           },
         });
       }
@@ -50,23 +52,18 @@ const rule: Rule = {
         const argument = node.argument as ASTNode | undefined;
         if (!argument) return;
 
-        if (
-          argument.type === 'NewExpression' ||
-          argument.type === 'CallExpression'
-        ) {
+        if (argument.type === 'NewExpression' || argument.type === 'CallExpression') {
           const callee = argument.callee as ASTNode | undefined;
           if (!callee) return;
 
-          const calleeName =
-            callee.type === 'Identifier' ? (callee.name as string) : null;
+          const calleeName = callee.type === 'Identifier' ? (callee.name as string) : null;
           if (calleeName !== 'Error') return;
 
           const args = (argument.arguments as ASTNode[] | undefined) ?? [];
           if (args.length === 0) return;
 
           const firstArg = args[0] as ASTNode;
-          const msgValue =
-            firstArg.type === 'Literal' ? String(firstArg.value) : '';
+          const msgValue = firstArg.type === 'Literal' ? String(firstArg.value) : '';
 
           if (THROW_NOT_IMPLEMENTED.test(msgValue)) {
             context.report({

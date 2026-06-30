@@ -55,9 +55,7 @@ export async function scanDirectory(
   directory: string,
   userConfig?: UserConfig,
 ): Promise<ScanResult> {
-  const config = userConfig
-    ? resolveConfig(userConfig, directory)
-    : await loadConfig(directory);
+  const config = userConfig ? resolveConfig(userConfig, directory) : await loadConfig(directory);
 
   return scan({ config });
 }

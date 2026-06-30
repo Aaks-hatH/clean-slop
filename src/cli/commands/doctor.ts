@@ -4,9 +4,7 @@ import fs from 'fs/promises';
 import { execSync } from 'child_process';
 import { loadConfig } from '../../config/loader.js';
 import { BUILT_IN_RULES } from '../../rules/index.js';
-import {
-  BOLD, CYAN, DIM, GREEN, RED, RESET, YELLOW,
-} from '../../utils/constants.js';
+import { BOLD, CYAN, DIM, GREEN, RED, RESET, YELLOW } from '../../utils/constants.js';
 import { PACKAGE_VERSION } from '../../version.js';
 
 function check(label: string, ok: boolean, detail?: string): void {

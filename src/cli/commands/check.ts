@@ -49,9 +49,7 @@ export async function runCheck(
   } else {
     const reasons: string[] = [];
     if (!scorePassed) {
-      reasons.push(
-        `score ${result.score.overall} below threshold ${config.failThreshold}`,
-      );
+      reasons.push(`score ${result.score.overall} below threshold ${config.failThreshold}`);
     }
     if (criticalExceeded) {
       reasons.push(

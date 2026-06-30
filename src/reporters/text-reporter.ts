@@ -55,9 +55,7 @@ function renderIssue(issue: Issue, root: string, verbose: boolean): string {
   const relPath = formatRelativePath(root, issue.location.file);
   const loc = `${relPath}:${issue.location.line}:${issue.location.column}`;
 
-  lines.push(
-    `  ${formatSeverity(issue.severity)} ${BOLD}${issue.message}${RESET}`,
-  );
+  lines.push(`  ${formatSeverity(issue.severity)} ${BOLD}${issue.message}${RESET}`);
   lines.push(`  ${DIM}${loc}${RESET}  ${GRAY}[${issue.ruleId}]${RESET}`);
 
   if (verbose) {
@@ -144,7 +142,8 @@ export function generateTextReport(result: ScanResult): string {
   for (const cat of score.categories) {
     const label = pad(cat.category, 24);
     const catScore = formatScore(cat.score);
-    const counts = DIM +
+    const counts =
+      DIM +
       (cat.criticalCount > 0 ? `  ${cat.criticalCount} critical` : '') +
       (cat.highCount > 0 ? `  ${cat.highCount} high` : '') +
       (cat.mediumCount > 0 ? `  ${cat.mediumCount} medium` : '') +
@@ -179,7 +178,9 @@ export function generateTextReport(result: ScanResult): string {
   lines.push('');
 
   if (score.productionReady) {
-    lines.push(`  ${GREEN}PRODUCTION READY${RESET}  Score above threshold (${config.failThreshold})`);
+    lines.push(
+      `  ${GREEN}PRODUCTION READY${RESET}  Score above threshold (${config.failThreshold})`,
+    );
   } else {
     lines.push(
       `  ${RED}NOT PRODUCTION READY${RESET}  Score ${score.overall} below threshold (${config.failThreshold})`,

@@ -63,10 +63,7 @@ function calculateTotal(items: number[]) {
 }
 
 // Giant function (fake - just to demonstrate the concept)
-function monolithicHandler(
-  _req: Record<string, unknown>,
-  _res: Record<string, unknown>,
-) {
+function monolithicHandler(_req: Record<string, unknown>, _res: Record<string, unknown>) {
   // Placeholder
   throw new Error('Not implemented');
 }

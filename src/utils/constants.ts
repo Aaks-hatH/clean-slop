@@ -10,11 +10,11 @@ export const SEVERITY_ORDER: Record<string, number> = {
 };
 
 export const SEVERITY_COLORS: Record<string, string> = {
-  critical: '\x1b[31m',  // red
-  high: '\x1b[91m',      // bright red
-  medium: '\x1b[33m',    // yellow
-  low: '\x1b[36m',       // cyan
-  info: '\x1b[37m',      // gray
+  critical: '\x1b[31m', // red
+  high: '\x1b[91m', // bright red
+  medium: '\x1b[33m', // yellow
+  low: '\x1b[36m', // cyan
+  info: '\x1b[37m', // gray
 };
 
 export const RESET = '\x1b[0m';

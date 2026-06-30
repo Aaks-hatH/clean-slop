@@ -9,11 +9,7 @@
 export type Severity = 'critical' | 'high' | 'medium' | 'low' | 'info';
 export type Confidence = 'certain' | 'high' | 'medium' | 'low';
 export type RuleCategory =
-  | 'ai-slop'
-  | 'security'
-  | 'reliability'
-  | 'maintainability'
-  | 'production-readiness';
+  'ai-slop' | 'security' | 'reliability' | 'maintainability' | 'production-readiness';
 
 // ---------------------------------------------------------------------------
 // Location
@@ -139,7 +135,9 @@ export interface RuleContext {
   source: string;
   ast: unknown;
   config: ResolvedConfig;
-  report(issue: Omit<Issue, 'ruleId' | 'ruleName' | 'category' | 'severity' | 'confidence' | 'docsUrl'>): void;
+  report(
+    issue: Omit<Issue, 'ruleId' | 'ruleName' | 'category' | 'severity' | 'confidence' | 'docsUrl'>,
+  ): void;
 }
 
 export interface Rule {

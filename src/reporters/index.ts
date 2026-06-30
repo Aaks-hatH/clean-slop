@@ -9,10 +9,7 @@ import { generateHtmlReport } from './html-reporter.js';
 
 export type ReporterName = 'text' | 'json' | 'html' | 'markdown' | 'sarif';
 
-export function generate(
-  result: ScanResult,
-  reporter: ReporterName = 'text',
-): string {
+export function generate(result: ScanResult, reporter: ReporterName = 'text'): string {
   switch (reporter) {
     case 'json':
       return generateJsonReport(result);
@@ -28,10 +25,7 @@ export function generate(
   }
 }
 
-export async function writeReport(
-  content: string,
-  outputPath: string,
-): Promise<void> {
+export async function writeReport(content: string, outputPath: string): Promise<void> {
   const dir = path.dirname(outputPath);
   await fs.mkdir(dir, { recursive: true });
   await fs.writeFile(outputPath, content, 'utf-8');

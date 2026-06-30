@@ -64,10 +64,7 @@ function isPromiseChained(node: ASTNode): boolean {
   const parent = node.parent as ASTNode | undefined;
   if (!parent) return false;
 
-  if (
-    parent.type === 'MemberExpression' ||
-    parent.type === 'CallExpression'
-  ) {
+  if (parent.type === 'MemberExpression' || parent.type === 'CallExpression') {
     return true;
   }
 
@@ -130,8 +127,7 @@ const rule: Rule = {
           fix: {
             description:
               'Await the Promise inside an async function, or add .catch() to handle rejection explicitly.',
-            code:
-              '// Option 1: await in an async function\nawait someAsyncFn();\n\n// Option 2: explicit catch\nsomeAsyncFn().catch((err) => {\n  logger.error("Operation failed:", err);\n});',
+            code: '// Option 1: await in an async function\nawait someAsyncFn();\n\n// Option 2: explicit catch\nsomeAsyncFn().catch((err) => {\n  logger.error("Operation failed:", err);\n});',
           },
         });
       },

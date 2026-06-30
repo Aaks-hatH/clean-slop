@@ -16,7 +16,7 @@ function createCLI(): Command {
     .name('clean-slop')
     .description(
       'Production Readiness Engine for JavaScript and TypeScript projects.\n' +
-      'Prevents low-quality, insecure, and AI-generated code from reaching production.',
+        'Prevents low-quality, insecure, and AI-generated code from reaching production.',
     )
     .version(PACKAGE_VERSION, '-v, --version', 'Print the current version')
     .helpOption('-h, --help', 'Display help information');

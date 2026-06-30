@@ -19,8 +19,7 @@ const rule: Rule = {
     category: 'maintainability',
     severity: 'medium',
     confidence: 'low',
-    description:
-      'Identifies import patterns that commonly cause circular dependency cycles.',
+    description: 'Identifies import patterns that commonly cause circular dependency cycles.',
     rationale:
       'Circular imports cause initialization order issues, undefined module exports at ' +
       'runtime, and confusing bugs that differ between bundlers. They are a sign of ' +
@@ -48,11 +47,7 @@ const rule: Rule = {
       const resolvedBase = path.basename(resolved);
 
       // Flag index imports from the same directory (classic barrel self-import)
-      if (
-        resolvedBase === 'index' &&
-        path.dirname(resolved) === dir &&
-        base !== 'index'
-      ) {
+      if (resolvedBase === 'index' && path.dirname(resolved) === dir && base !== 'index') {
         context.report({
           message: `Import from "${importPath}" may create a circular dependency.`,
           explanation:

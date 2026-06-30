@@ -44,12 +44,11 @@ const rule: Rule = {
           `Cyclomatic complexity measures the number of independent paths through code. ` +
           `A complexity of ${complexity} means this function has at least ${complexity} independent ` +
           'execution paths that all need to be understood and tested.',
-        impact:
-          isHigh
-            ? 'Extreme complexity. This function cannot be reliably tested or maintained. ' +
-              'Defects introduced here will be very difficult to locate.'
-            : 'High complexity makes this function difficult to test thoroughly. ' +
-              'Each untested path is a potential production defect.',
+        impact: isHigh
+          ? 'Extreme complexity. This function cannot be reliably tested or maintained. ' +
+            'Defects introduced here will be very difficult to locate.'
+          : 'High complexity makes this function difficult to test thoroughly. ' +
+            'Each untested path is a potential production defect.',
         location: getLocation(node, context.filePath),
         fix: {
           description:

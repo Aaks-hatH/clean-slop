@@ -11,7 +11,11 @@ import dangerousCors from '../../src/rules/security/dangerous-cors.js';
 
 const defaultConfig = resolveConfig({}, process.cwd());
 
-function runRule(rule: Parameters<RuleEngine['register']>[0], source: string, filePath = 'test.ts') {
+function runRule(
+  rule: Parameters<RuleEngine['register']>[0],
+  source: string,
+  filePath = 'test.ts',
+) {
   const engine = new RuleEngine();
   engine.register(rule);
   const parsed = parseSource(filePath, source);

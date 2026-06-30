@@ -12,16 +12,29 @@ import type { ASTNode } from '../../utils/ast.js';
 
 function isAsyncFunction(node: ASTNode): boolean {
   return (
-    node.type === 'FunctionDeclaration' ||
-    node.type === 'FunctionExpression' ||
-    node.type === 'ArrowFunctionExpression'
-  ) && node.async === true;
+    (node.type === 'FunctionDeclaration' ||
+      node.type === 'FunctionExpression' ||
+      node.type === 'ArrowFunctionExpression') &&
+    node.async === true
+  );
 }
 
 const LIKELY_ASYNC = new Set([
-  'fetch', 'readFile', 'writeFile', 'connect', 'query', 'execute',
-  'findOne', 'find', 'save', 'create', 'update', 'delete',
-  'sendMail', 'publish', 'subscribe',
+  'fetch',
+  'readFile',
+  'writeFile',
+  'connect',
+  'query',
+  'execute',
+  'findOne',
+  'find',
+  'save',
+  'create',
+  'update',
+  'delete',
+  'sendMail',
+  'publish',
+  'subscribe',
 ]);
 
 function looksAsync(node: ASTNode): boolean {
@@ -83,8 +96,7 @@ const rule: Rule = {
               'This causes subtle type errors and may result in unhandled rejections.',
             location: getLocation(fn, context.filePath),
             fix: {
-              description:
-                'Add await to the expression body: async () => await fetch(...)',
+              description: 'Add await to the expression body: async () => await fetch(...)',
               code: 'const getData = async () => await fetch("/api/data");',
             },
           });

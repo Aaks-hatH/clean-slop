@@ -6,13 +6,7 @@ import type { ScanOptions } from '../../scanners/scanner.js';
 import { generate, writeReport } from '../../reporters/index.js';
 import type { ReporterName } from '../../reporters/index.js';
 import type { ResolvedConfig, Severity } from '../../types.js';
-import {
-  BOLD,
-  DIM,
-  GREEN,
-  RED,
-  RESET,
-} from '../../utils/constants.js';
+import { BOLD, DIM, GREEN, RED, RESET } from '../../utils/constants.js';
 
 export interface ScanCommandOptions {
   config?: string;
@@ -65,10 +59,17 @@ export async function runScan(
       : baseConfig.failThreshold,
     categories: {
       'ai-slop': options.aiSlop === false ? false : (baseConfig.categories['ai-slop'] ?? true),
-      'security': options.security === false ? false : (baseConfig.categories['security'] ?? true),
-      'reliability': options.reliability === false ? false : (baseConfig.categories['reliability'] ?? true),
-      'maintainability': options.maintainability === false ? false : (baseConfig.categories['maintainability'] ?? true),
-      'production-readiness': options.productionReadiness === false ? false : (baseConfig.categories['production-readiness'] ?? true),
+      security: options.security === false ? false : (baseConfig.categories['security'] ?? true),
+      reliability:
+        options.reliability === false ? false : (baseConfig.categories['reliability'] ?? true),
+      maintainability:
+        options.maintainability === false
+          ? false
+          : (baseConfig.categories['maintainability'] ?? true),
+      'production-readiness':
+        options.productionReadiness === false
+          ? false
+          : (baseConfig.categories['production-readiness'] ?? true),
     },
   };
 

@@ -2,7 +2,8 @@ import type { Rule } from '../../types.js';
 import type { ASTNode } from '../../utils/ast.js';
 
 const LOCALHOST_PATTERN = /https?:\/\/(?:localhost|127\.0\.0\.1|0\.0\.0\.0)(?::\d+)?/i;
-const DEBUG_FLAG_NAMES = /^(?:debug|DEBUG|isDebug|IS_DEBUG|debugMode|DEBUG_MODE|devMode|DEV_MODE|testMode|TEST_MODE)$/;
+const DEBUG_FLAG_NAMES =
+  /^(?:debug|DEBUG|isDebug|IS_DEBUG|debugMode|DEBUG_MODE|devMode|DEV_MODE|testMode|TEST_MODE)$/;
 const MOCK_FUNCTION_NAMES = /^(?:mock|fake|stub|dummy|placeholder)[\w_]*/i;
 const TEST_CREDENTIAL_PATTERNS = [
   /test[_-]?(password|secret|token|key)/i,
@@ -160,7 +161,11 @@ const rule: Rule = {
     }
 
     function getLocation(node: ASTNode, filePath: string) {
-      return { file: filePath, line: node.loc?.start.line ?? 1, column: node.loc?.start.column ?? 0 };
+      return {
+        file: filePath,
+        line: node.loc?.start.line ?? 1,
+        column: node.loc?.start.column ?? 0,
+      };
     }
   },
 };

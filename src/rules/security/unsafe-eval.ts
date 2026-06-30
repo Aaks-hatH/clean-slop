@@ -2,11 +2,7 @@ import type { Rule } from '../../types.js';
 import { traverse, getLocation, getCalleeName } from '../../utils/ast.js';
 import type { ASTNode } from '../../utils/ast.js';
 
-const DANGEROUS_EVAL_APIS = new Set([
-  'eval',
-  'Function',
-  'execScript',
-]);
+const DANGEROUS_EVAL_APIS = new Set(['eval', 'Function', 'execScript']);
 
 const rule: Rule = {
   meta: {
@@ -15,7 +11,8 @@ const rule: Rule = {
     category: 'security',
     severity: 'critical',
     confidence: 'high',
-    description: 'Detects use of eval() and the Function constructor, which execute arbitrary code.',
+    description:
+      'Detects use of eval() and the Function constructor, which execute arbitrary code.',
     rationale:
       'eval() and new Function() execute strings as JavaScript code. When any part of the ' +
       'string comes from user input or external data, this is a code injection vulnerability.',

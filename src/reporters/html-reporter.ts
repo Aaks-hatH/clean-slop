@@ -12,11 +12,16 @@ function escapeHtml(str: string): string {
 
 function severityColor(severity: Severity): string {
   switch (severity) {
-    case 'critical': return '#dc2626';
-    case 'high': return '#ea580c';
-    case 'medium': return '#d97706';
-    case 'low': return '#2563eb';
-    case 'info': return '#6b7280';
+    case 'critical':
+      return '#dc2626';
+    case 'high':
+      return '#ea580c';
+    case 'medium':
+      return '#d97706';
+    case 'low':
+      return '#2563eb';
+    case 'info':
+      return '#6b7280';
   }
 }
 
@@ -42,12 +47,16 @@ function renderIssueCard(issue: Issue, root: string): string {
       <div class="issue-explanation">${escapeHtml(issue.explanation)}</div>
       ${issue.impact ? `<div class="issue-impact"><strong>Impact:</strong> ${escapeHtml(issue.impact)}</div>` : ''}
       ${issue.snippet ? `<pre class="issue-snippet"><code>${escapeHtml(issue.snippet)}</code></pre>` : ''}
-      ${issue.fix ? `
+      ${
+        issue.fix
+          ? `
         <div class="issue-fix">
           <strong>Fix:</strong> ${escapeHtml(issue.fix.description)}
           ${issue.fix.code ? `<pre class="fix-code"><code>${escapeHtml(issue.fix.code)}</code></pre>` : ''}
         </div>
-      ` : ''}
+      `
+          : ''
+      }
       ${issue.docsUrl ? `<a class="docs-link" href="${escapeHtml(issue.docsUrl)}" target="_blank" rel="noopener">Documentation</a>` : ''}
     </div>`;
 }
@@ -63,9 +72,10 @@ export function generateHtmlReport(result: ScanResult): string {
 
   const issueCards = issues.map((i) => renderIssueCard(i, root)).join('\n');
 
-  const categoryRows = score.categories.map((cat) => {
-    const color = scoreColor(cat.score);
-    return `
+  const categoryRows = score.categories
+    .map((cat) => {
+      const color = scoreColor(cat.score);
+      return `
       <tr>
         <td>${escapeHtml(cat.category)}</td>
         <td><span style="color:${color};font-weight:600">${cat.score}/100</span></td>
@@ -75,7 +85,8 @@ export function generateHtmlReport(result: ScanResult): string {
         <td>${cat.mediumCount}</td>
         <td>${cat.lowCount}</td>
       </tr>`;
-  }).join('\n');
+    })
+    .join('\n');
 
   const durationStr = durationMs < 1000 ? `${durationMs}ms` : `${(durationMs / 1000).toFixed(2)}s`;
   const overallColor = scoreColor(score.overall);

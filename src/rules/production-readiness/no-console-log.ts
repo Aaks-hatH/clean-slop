@@ -11,11 +11,7 @@ const DEBUG_METHODS = new Set([
 ]);
 
 // These are acceptable in production
-const ALLOWED_CONSOLE = new Set([
-  'console.error',
-  'console.warn',
-  'console.info',
-]);
+const ALLOWED_CONSOLE = new Set(['console.error', 'console.warn', 'console.info']);
 
 const rule: Rule = {
   meta: {
@@ -24,8 +20,7 @@ const rule: Rule = {
     category: 'production-readiness',
     severity: 'low',
     confidence: 'certain',
-    description:
-      'Detects console.log and other debug console methods left in production code.',
+    description: 'Detects console.log and other debug console methods left in production code.',
     rationale:
       'Debug console statements leak internal application data, degrade performance, ' +
       'and indicate code that was not reviewed before shipping.',
@@ -70,8 +65,7 @@ const rule: Rule = {
               description:
                 'Remove the console statement. For intentional logging, use a structured logger ' +
                 '(pino, winston, bunyan) that supports log levels and structured output.',
-              code:
-                "import pino from 'pino';\n\nconst logger = pino();\nlogger.debug({ userId }, 'User lookup completed');",
+              code: "import pino from 'pino';\n\nconst logger = pino();\nlogger.debug({ userId }, 'User lookup completed');",
             },
           });
         }

@@ -12,12 +12,22 @@ import type { ASTNode } from '../../utils/ast.js';
  *   connection.execute("INSERT INTO " + tableName + " VALUES (?)")
  */
 
-const SQL_KEYWORDS = /\b(SELECT|INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|TRUNCATE|EXEC|EXECUTE|UNION|FROM|WHERE|JOIN)\b/i;
+const SQL_KEYWORDS =
+  /\b(SELECT|INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|TRUNCATE|EXEC|EXECUTE|UNION|FROM|WHERE|JOIN)\b/i;
 
 const SQL_CALL_PATTERNS = [
-  'query', 'execute', 'exec', 'run', 'prepare', 'raw',
-  'db.query', 'db.execute', 'pool.query', 'connection.query',
-  'knex.raw', 'sequelize.query',
+  'query',
+  'execute',
+  'exec',
+  'run',
+  'prepare',
+  'raw',
+  'db.query',
+  'db.execute',
+  'pool.query',
+  'connection.query',
+  'knex.raw',
+  'sequelize.query',
 ];
 
 function looksLikeSqlCall(node: ASTNode): boolean {
@@ -87,7 +97,8 @@ const rule: Rule = {
           if (!containsSqlKeywords(rawContent)) return;
 
           context.report({
-            message: 'Possible SQL injection: template literal with expressions passed to query function.',
+            message:
+              'Possible SQL injection: template literal with expressions passed to query function.',
             explanation:
               'This SQL query is built using a template literal that embeds JavaScript variables. ' +
               'If any of the interpolated values derive from user input, an attacker can alter the ' +
@@ -126,8 +137,7 @@ const rule: Rule = {
                 description:
                   'Replace string concatenation with parameterized queries. ' +
                   'Never construct SQL from variables.',
-                code:
-                  'db.query(\n  "SELECT * FROM users WHERE name = ? AND role = ?",\n  [userName, userRole]\n)',
+                code: 'db.query(\n  "SELECT * FROM users WHERE name = ? AND role = ?",\n  [userName, userRole]\n)',
               },
             });
           }

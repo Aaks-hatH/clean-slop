@@ -3,10 +3,22 @@ import { traverse, getLocation } from '../../utils/ast.js';
 import type { ASTNode } from '../../utils/ast.js';
 
 const FS_WRITE_METHODS = new Set([
-  'readFile', 'readFileSync', 'writeFile', 'writeFileSync',
-  'readdir', 'readdirSync', 'createReadStream', 'createWriteStream',
-  'unlink', 'unlinkSync', 'stat', 'statSync', 'access', 'accessSync',
-  'open', 'openSync',
+  'readFile',
+  'readFileSync',
+  'writeFile',
+  'writeFileSync',
+  'readdir',
+  'readdirSync',
+  'createReadStream',
+  'createWriteStream',
+  'unlink',
+  'unlinkSync',
+  'stat',
+  'statSync',
+  'access',
+  'accessSync',
+  'open',
+  'openSync',
 ]);
 
 function isFsCallWithDynamicPath(node: ASTNode): boolean {
@@ -52,9 +64,10 @@ const rule: Rule = {
       CallExpression(node: ASTNode) {
         if (isFsCallWithDynamicPath(node)) {
           const callee = node.callee as ASTNode;
-          const prop = callee.type === 'MemberExpression'
-            ? String((callee.property as ASTNode).name)
-            : String((callee as ASTNode).name);
+          const prop =
+            callee.type === 'MemberExpression'
+              ? String((callee.property as ASTNode).name)
+              : String((callee as ASTNode).name);
 
           context.report({
             message: `Possible path traversal: dynamic path passed to fs.${prop}().`,
@@ -69,8 +82,7 @@ const rule: Rule = {
             fix: {
               description:
                 'Resolve the path and verify it begins with the intended base directory before use.',
-              code:
-                "import path from 'path';\n\nconst baseDir = path.resolve('./uploads');\nconst safePath = path.resolve(baseDir, userInput);\n\nif (!safePath.startsWith(baseDir + path.sep)) {\n  throw new Error('Path traversal detected');\n}\n\nfs.readFile(safePath, 'utf-8');",
+              code: "import path from 'path';\n\nconst baseDir = path.resolve('./uploads');\nconst safePath = path.resolve(baseDir, userInput);\n\nif (!safePath.startsWith(baseDir + path.sep)) {\n  throw new Error('Path traversal detected');\n}\n\nfs.readFile(safePath, 'utf-8');",
             },
           });
         }

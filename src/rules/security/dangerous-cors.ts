@@ -10,8 +10,8 @@ function getPropertyValue(props: ASTNode[], keyName: string): ASTNode | undefine
       key?.type === 'Identifier'
         ? String(key.name)
         : key?.type === 'Literal'
-        ? String(key.value)
-        : null;
+          ? String(key.value)
+          : null;
 
     if (keyStr === keyName) {
       return prop.value as ASTNode | undefined;
@@ -90,8 +90,7 @@ const rule: Rule = {
                 description:
                   'Specify an explicit allowlist of trusted origins. Use an environment variable ' +
                   'to configure origins per deployment environment.',
-                code:
-                  "cors({\n  origin: process.env.ALLOWED_ORIGINS?.split(',') ?? [],\n  credentials: true,\n})",
+                code: "cors({\n  origin: process.env.ALLOWED_ORIGINS?.split(',') ?? [],\n  credentials: true,\n})",
               },
             });
           }
@@ -154,7 +153,7 @@ const rule: Rule = {
                 'combined with secure: true. Without it, the cookie is rejected by modern browsers.',
               impact:
                 'Cross-origin requests will fail in production because the browser will reject ' +
-                "the cookie. This may also enable CSRF if the application is served over HTTP.",
+                'the cookie. This may also enable CSRF if the application is served over HTTP.',
               location: getLocation(sameSiteNode, context.filePath),
               fix: {
                 description:

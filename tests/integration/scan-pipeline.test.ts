@@ -102,9 +102,9 @@ describe('Full scan pipeline', () => {
       {
         categories: {
           'ai-slop': false,
-          'security': false,
-          'reliability': false,
-          'maintainability': false,
+          security: false,
+          reliability: false,
+          maintainability: false,
           'production-readiness': false,
         },
       },

@@ -3,7 +3,12 @@ import { traverse, getLocation } from '../../utils/ast.js';
 import type { ASTNode } from '../../utils/ast.js';
 
 const DANGEROUS_CHILD_PROCESS = new Set([
-  'exec', 'execSync', 'spawn', 'spawnSync', 'execFile', 'execFileSync',
+  'exec',
+  'execSync',
+  'spawn',
+  'spawnSync',
+  'execFile',
+  'execFileSync',
 ]);
 
 function looksLikeChildProcessCall(node: ASTNode): boolean {
@@ -65,9 +70,11 @@ const rule: Rule = {
         if (!firstArgIsDynamic(node)) return;
 
         const callee = node.callee as ASTNode;
-        const prop = (callee.type === 'MemberExpression'
-          ? (callee.property as ASTNode).name
-          : (callee as ASTNode).name) as string;
+        const prop = (
+          callee.type === 'MemberExpression'
+            ? (callee.property as ASTNode).name
+            : (callee as ASTNode).name
+        ) as string;
 
         context.report({
           message: `Possible command injection: dynamic argument passed to child_process.${prop}().`,
@@ -83,8 +90,7 @@ const rule: Rule = {
             description:
               'Use execFile() or spawn() with an argument array instead of exec() with a shell string. ' +
               'Never pass user input to a shell command. Validate and whitelist all inputs.',
-            code:
-              "// Dangerous:\n// exec(`ls ${userInput}`)\n\n// Safe:\nimport { execFile } from 'child_process';\nexecFile('ls', [sanitizedPath], callback);",
+            code: "// Dangerous:\n// exec(`ls ${userInput}`)\n\n// Safe:\nimport { execFile } from 'child_process';\nexecFile('ls', [sanitizedPath], callback);",
           },
         });
       },

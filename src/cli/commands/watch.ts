@@ -22,9 +22,7 @@ export async function runWatch(
 
   if (options.verbose) config.verbose = true;
 
-  console.log(
-    `\n${BOLD}clean-slop watch${RESET}  ${DIM}Watching ${cwd}${RESET}`,
-  );
+  console.log(`\n${BOLD}clean-slop watch${RESET}  ${DIM}Watching ${cwd}${RESET}`);
   console.log(`${DIM}Press Ctrl+C to stop.${RESET}\n`);
 
   let debounceTimer: ReturnType<typeof setTimeout> | null = null;
@@ -68,28 +66,25 @@ export async function runWatch(
   await runScanCycle();
 
   // Watch for changes
-  const watcher = fs.watch(
-    cwd,
-    { recursive: true },
-    (event, filename) => {
-      if (!filename) return;
+  const watcher = fs.watch(cwd, { recursive: true }, (event, filename) => {
+    if (!filename) return;
 
-      // Filter to JS/TS files only
-      if (!/\.(js|jsx|ts|tsx|mjs|cjs)$/.test(filename)) return;
+    // Filter to JS/TS files only
+    if (!/\.(js|jsx|ts|tsx|mjs|cjs)$/.test(filename)) return;
 
-      // Skip excluded paths
-      if (
-        filename.includes('node_modules') ||
-        filename.includes('dist') ||
-        filename.includes('.next')
-      ) return;
+    // Skip excluded paths
+    if (
+      filename.includes('node_modules') ||
+      filename.includes('dist') ||
+      filename.includes('.next')
+    )
+      return;
 
-      if (debounceTimer) clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(() => {
-        void runScanCycle(path.join(cwd, filename));
-      }, DEBOUNCE_MS);
-    },
-  );
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      void runScanCycle(path.join(cwd, filename));
+    }, DEBOUNCE_MS);
+  });
 
   process.on('SIGINT', () => {
     watcher.close();

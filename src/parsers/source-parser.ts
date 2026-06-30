@@ -74,24 +74,13 @@ export function parseSource(filePath: string, source: string): ParsedFile {
       }
     }
 
-    const message =
-      err instanceof Error
-        ? err.message
-        : 'Unknown parse error';
+    const message = err instanceof Error ? err.message : 'Unknown parse error';
 
-    throw new ParseError(
-      `Failed to parse ${filePath}: ${message}`,
-      filePath,
-      err,
-    );
+    throw new ParseError(`Failed to parse ${filePath}: ${message}`, filePath, err);
   }
 }
 
-export function extractSnippet(
-  source: string,
-  line: number,
-  contextLines = 2,
-): string {
+export function extractSnippet(source: string, line: number, contextLines = 2): string {
   const lines = source.split('\n');
   const start = Math.max(0, line - 1 - contextLines);
   const end = Math.min(lines.length, line + contextLines);

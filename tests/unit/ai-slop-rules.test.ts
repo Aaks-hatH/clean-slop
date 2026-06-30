@@ -16,7 +16,11 @@ function makeEngine(...rules: Parameters<RuleEngine['register']>[0][]) {
 
 const defaultConfig = resolveConfig({}, process.cwd());
 
-function runRule(rule: Parameters<RuleEngine['register']>[0], source: string, filePath = 'test.ts') {
+function runRule(
+  rule: Parameters<RuleEngine['register']>[0],
+  source: string,
+  filePath = 'test.ts',
+) {
   const engine = makeEngine(rule);
   const parsed = parseSource(filePath, source);
   return engine.runOnFile(parsed, defaultConfig);
@@ -177,7 +181,9 @@ describe('ai-slop/dead-code', () => {
 describe('ai-slop/high-complexity', () => {
   it('flags a highly complex function', () => {
     // Construct a function with > 10 branches
-    const branches = Array.from({ length: 11 }, (_, i) => `if (x === ${i}) return ${i};`).join('\n');
+    const branches = Array.from({ length: 11 }, (_, i) => `if (x === ${i}) return ${i};`).join(
+      '\n',
+    );
     const source = `function complex(x) { ${branches} return -1; }`;
     const issues = runRule(highComplexity, source);
     expect(issues).toHaveLength(1);

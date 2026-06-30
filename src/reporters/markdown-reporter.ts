@@ -15,10 +15,7 @@ function scoreBadge(score: number): string {
 }
 
 function gradeBadge(grade: string): string {
-  const color =
-    grade === 'A' || grade === 'B' ? 'brightgreen' :
-    grade === 'C' ? 'yellow' :
-    'red';
+  const color = grade === 'A' || grade === 'B' ? 'brightgreen' : grade === 'C' ? 'yellow' : 'red';
   return `![grade](https://img.shields.io/badge/grade-${grade}-${color})`;
 }
 
@@ -97,9 +94,7 @@ export function generateMarkdownReport(result: ScanResult): string {
 
   for (const cat of score.categories) {
     const emoji = cat.score >= 90 ? '✅' : cat.score >= 70 ? '⚠️' : '❌';
-    lines.push(
-      `| ${cat.category} | ${emoji} ${cat.score}/100 | ${cat.issueCount} |`,
-    );
+    lines.push(`| ${cat.category} | ${emoji} ${cat.score}/100 | ${cat.issueCount} |`);
   }
 
   lines.push('');

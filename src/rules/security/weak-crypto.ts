@@ -47,9 +47,9 @@ const rule: Rule = {
               'predictable values that attackers can guess or enumerate.',
             location: getLocation(node, context.filePath),
             fix: {
-              description: 'Use the Web Crypto API or Node.js crypto module for secure random values.',
-              code:
-                "// Node.js:\nimport { randomBytes } from 'crypto';\nconst token = randomBytes(32).toString('hex');\n\n// Browser:\nconst array = new Uint8Array(32);\ncrypto.getRandomValues(array);",
+              description:
+                'Use the Web Crypto API or Node.js crypto module for secure random values.',
+              code: "// Node.js:\nimport { randomBytes } from 'crypto';\nconst token = randomBytes(32).toString('hex');\n\n// Browser:\nconst array = new Uint8Array(32);\ncrypto.getRandomValues(array);",
             },
           });
         }

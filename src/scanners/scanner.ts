@@ -93,10 +93,7 @@ function computeScore(issues: Issue[], config: ResolvedConfig) {
       info: 0,
     };
 
-    const totalDeduction = catIssues.reduce(
-      (sum, i) => sum + (deductions[i.severity] ?? 0),
-      0,
-    );
+    const totalDeduction = catIssues.reduce((sum, i) => sum + (deductions[i.severity] ?? 0), 0);
 
     const raw = Math.max(0, 100 - totalDeduction);
 
@@ -111,8 +108,7 @@ function computeScore(issues: Issue[], config: ResolvedConfig) {
     };
   });
 
-  const overall =
-    categoryScores.reduce((sum, c) => sum + c.score, 0) / categoryScores.length;
+  const overall = categoryScores.reduce((sum, c) => sum + c.score, 0) / categoryScores.length;
 
   const grade = computeGrade(overall);
 
@@ -120,7 +116,9 @@ function computeScore(issues: Issue[], config: ResolvedConfig) {
     overall: Math.round(overall),
     categories: categoryScores,
     grade,
-    productionReady: overall >= config.failThreshold && issues.filter((i) => i.severity === 'critical').length === 0,
+    productionReady:
+      overall >= config.failThreshold &&
+      issues.filter((i) => i.severity === 'critical').length === 0,
   };
 }
 
@@ -154,7 +152,12 @@ export async function scan(options: ScanOptions): Promise<ScanResult> {
 
       // Skip very large files (> 2MB)
       if (source.length > 2_000_000) {
-        fileResults.push({ file: filePath, issues: [], skipped: true, skipReason: 'file too large' });
+        fileResults.push({
+          file: filePath,
+          issues: [],
+          skipped: true,
+          skipReason: 'file too large',
+        });
         continue;
       }
 

@@ -62,8 +62,7 @@ export class RuleEngine {
         config,
         report(partial) {
           const snippet =
-            partial.snippet ??
-            extractSnippet(parsedFile.source, partial.location.line);
+            partial.snippet ?? extractSnippet(parsedFile.source, partial.location.line);
 
           ruleIssues.push({
             ruleId: rule.meta.id,

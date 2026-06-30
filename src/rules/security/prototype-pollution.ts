@@ -44,8 +44,7 @@ const rule: Rule = {
     category: 'security',
     severity: 'high',
     confidence: 'medium',
-    description:
-      'Detects patterns that may allow attackers to pollute Object.prototype.',
+    description: 'Detects patterns that may allow attackers to pollute Object.prototype.',
     rationale:
       'Prototype pollution allows an attacker to inject properties into Object.prototype, ' +
       'affecting all objects in the application. This can bypass security checks, cause denial ' +
@@ -90,7 +89,8 @@ const rule: Rule = {
         } else {
           // Dynamic key - report as potential issue
           context.report({
-            message: 'Dynamic bracket assignment may allow prototype pollution if key is not validated.',
+            message:
+              'Dynamic bracket assignment may allow prototype pollution if key is not validated.',
             explanation:
               'Writing to obj[dynamicKey] with an unvalidated key allows an attacker to set ' +
               '__proto__ or constructor, polluting Object.prototype for all objects.',

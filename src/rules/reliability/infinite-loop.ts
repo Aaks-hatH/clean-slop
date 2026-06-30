@@ -85,8 +85,7 @@ const rule: Rule = {
             explanation:
               'This for(;;) loop has no termination condition and no exit statement. ' +
               'It will run indefinitely.',
-            impact:
-              'Blocks the Node.js event loop and causes complete server unresponsiveness.',
+            impact: 'Blocks the Node.js event loop and causes complete server unresponsiveness.',
             location: getLocation(node, context.filePath),
             fix: {
               description:

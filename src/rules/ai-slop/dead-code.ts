@@ -9,7 +9,8 @@ const rule: Rule = {
     category: 'ai-slop',
     severity: 'medium',
     confidence: 'certain',
-    description: 'Detects unreachable code that follows a return, throw, break, or continue statement.',
+    description:
+      'Detects unreachable code that follows a return, throw, break, or continue statement.',
     rationale:
       'Dead code after early exits is a common artifact of AI code generation. It indicates ' +
       'that the generator added logic without tracking control flow, producing code that never executes.',

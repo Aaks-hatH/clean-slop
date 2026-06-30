@@ -10,8 +10,7 @@ import type { ASTNode } from '../../utils/ast.js';
  *   function isValid(data) { return true; }
  */
 
-const VALIDATION_NAME_PATTERN =
-  /^(validate|isValid|check|verify|sanitize|assert)/i;
+const VALIDATION_NAME_PATTERN = /^(validate|isValid|check|verify|sanitize|assert)/i;
 
 const rule: Rule = {
   meta: {

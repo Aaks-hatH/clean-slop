@@ -91,7 +91,8 @@ export function getStringValue(node: ASTNode | unknown): string | null {
   if (n.type === 'TemplateLiteral') {
     const quasis = n.quasis as ASTNode[] | undefined;
     if (quasis && quasis.length === 1) {
-      const cooked = (quasis[0] as Record<string, unknown>)?.value as Record<string, unknown> | undefined;
+      const cooked = (quasis[0] as Record<string, unknown>)?.value as
+        Record<string, unknown> | undefined;
       if (typeof cooked?.cooked === 'string') return cooked.cooked;
     }
   }
@@ -138,7 +139,7 @@ export function isFunctionNode(node: ASTNode): boolean {
  */
 export function countFunctionLines(node: ASTNode): number {
   if (!node.loc) return 0;
-  return (node.loc.end.line - node.loc.start.line) + 1;
+  return node.loc.end.line - node.loc.start.line + 1;
 }
 
 /**
@@ -149,22 +150,38 @@ export function cyclomaticComplexity(funcNode: ASTNode): number {
   let complexity = 1;
 
   traverse(funcNode, {
-    IfStatement() { complexity++; },
+    IfStatement() {
+      complexity++;
+    },
     SwitchCase(node) {
       if (node.test !== null) complexity++;
     },
-    ConditionalExpression() { complexity++; },
+    ConditionalExpression() {
+      complexity++;
+    },
     LogicalExpression(node) {
       if (node.operator === '&&' || node.operator === '||' || node.operator === '??') {
         complexity++;
       }
     },
-    ForStatement() { complexity++; },
-    ForInStatement() { complexity++; },
-    ForOfStatement() { complexity++; },
-    WhileStatement() { complexity++; },
-    DoWhileStatement() { complexity++; },
-    CatchClause() { complexity++; },
+    ForStatement() {
+      complexity++;
+    },
+    ForInStatement() {
+      complexity++;
+    },
+    ForOfStatement() {
+      complexity++;
+    },
+    WhileStatement() {
+      complexity++;
+    },
+    DoWhileStatement() {
+      complexity++;
+    },
+    CatchClause() {
+      complexity++;
+    },
   });
 
   return complexity;
@@ -178,8 +195,14 @@ export function maxNestingDepth(ast: unknown, startDepth = 0): number {
   const node = ast as ASTNode;
 
   const nestingTypes = new Set([
-    'IfStatement', 'ForStatement', 'ForInStatement', 'ForOfStatement',
-    'WhileStatement', 'DoWhileStatement', 'SwitchStatement', 'TryStatement',
+    'IfStatement',
+    'ForStatement',
+    'ForInStatement',
+    'ForOfStatement',
+    'WhileStatement',
+    'DoWhileStatement',
+    'SwitchStatement',
+    'TryStatement',
     'WithStatement',
   ]);
 

@@ -3,14 +3,7 @@ import path from 'path';
 import type { ResolvedConfig, RuleCategory, Severity, UserConfig } from '../types.js';
 import { PACKAGE_VERSION } from '../version.js';
 
-const DEFAULT_INCLUDE = [
-  '**/*.js',
-  '**/*.jsx',
-  '**/*.ts',
-  '**/*.tsx',
-  '**/*.mjs',
-  '**/*.cjs',
-];
+const DEFAULT_INCLUDE = ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx', '**/*.mjs', '**/*.cjs'];
 
 const DEFAULT_EXCLUDE = [
   '**/node_modules/**',
@@ -29,9 +22,9 @@ const DEFAULT_IGNORE_PATTERNS: string[] = [];
 
 const DEFAULT_CATEGORIES: Record<RuleCategory, boolean> = {
   'ai-slop': true,
-  'security': true,
-  'reliability': true,
-  'maintainability': true,
+  security: true,
+  reliability: true,
+  maintainability: true,
   'production-readiness': true,
 };
 
@@ -66,9 +59,7 @@ export async function loadConfig(cwd: string, configPath?: string): Promise<Reso
   let userConfig: UserConfig = {};
 
   try {
-    const result = configPath
-      ? await explorer.load(configPath)
-      : await explorer.search(cwd);
+    const result = configPath ? await explorer.load(configPath) : await explorer.search(cwd);
 
     if (result && !result.isEmpty) {
       userConfig = result.config as UserConfig;
