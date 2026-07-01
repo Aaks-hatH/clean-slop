@@ -1,4 +1,8 @@
 # clean-slop
+[![npm version](https://img.shields.io/npm/v/clean-slop)](https://www.npmjs.com/package/clean-slop)
+[![npm downloads](https://img.shields.io/npm/dm/clean-slop)](https://www.npmjs.com/package/clean-slop)
+[![License](https://img.shields.io/npm/l/clean-slop)](https://github.com/Aaks-hatH/clean-slop/blob/main/LICENSE)
+[![clean-slop](https://img.shields.io/badge/clean--slop-self--scanned-brightgreen)](https://github.com/Aaks-hatH/clean-slop)
 
 **A production readiness engine for modern JavaScript and TypeScript projects.**
 
