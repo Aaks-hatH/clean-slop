@@ -44,20 +44,44 @@ jobs:
       - name: Bump patch version
         id: bump
         run: |
-          npm version patch -m "chore(release): %s [skip release]"
-          echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+          CURRENT=$(node -p "require('./package.json').version")
+          TAG="v$CURRENT"
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists — skipping version bump"
+            echo "version=$CURRENT" >> "$GITHUB_OUTPUT"
+            echo "already_tagged=true" >> "$GITHUB_OUTPUT"
+          else
+            npm version patch -m "chore(release): %s [skip release]"
+            NEW=$(node -p "require('./package.json').version")
+            echo "version=$NEW" >> "$GITHUB_OUTPUT"
+            echo "already_tagged=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Push version bump and tag
+        if: steps.bump.outputs.already_tagged == 'false'
         run: |
           git push origin main
           git push origin "v${{ steps.bump.outputs.version }}"
 
+      - name: Check if version already published on npm
+        id: npm_check
+        run: |
+          VERSION="${{ steps.bump.outputs.version }}"
+          if npm view "clean-slop@$VERSION" version >/dev/null 2>&1; then
+            echo "Version $VERSION already on npm — skipping publish"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Publish to npm
+        if: steps.npm_check.outputs.skip == 'false'
         run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub Release
+        if: steps.npm_check.outputs.skip == 'false'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.bump.outputs.version }}
